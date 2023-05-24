@@ -1,12 +1,15 @@
 package com.dwi.maurea.network
 
+import androidx.annotation.RawRes
 import com.dwi.maurea.data.remote.response.auth.LoginResponse
 import com.dwi.maurea.data.remote.response.auth.RegisterResponse
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
+
     @FormUrlEncoded
     @POST("users")
     fun register(
@@ -16,10 +19,15 @@ interface ApiService {
         @Field("confirmPassword") confirmPassword: String,
     ): Call<RegisterResponse>
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
+//    @POST("login")
+//    suspend fun login(
+//        @Field("email") email: String,
+//        @Field("password") password: String,
+//    ): Response<LoginResponse>
+
     @POST("login")
     suspend fun login(
-        @Field("email") email: String,
-        @Field("password") password: String,
+        @Body loginRequest: RequestBody
     ): Response<LoginResponse>
 }
