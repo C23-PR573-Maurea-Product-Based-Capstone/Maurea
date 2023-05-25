@@ -16,7 +16,7 @@ import retrofit2.Response
 
 class MaureaDataRepository : MaureaDataSource {
     override suspend fun authRequest(email: String, password: String): Response<LoginResponse> {
-        return getService().login(loginBodyRequest(email, password))
+        return getService().login(email, password)
     }
 
     override suspend fun auth(
@@ -24,21 +24,26 @@ class MaureaDataRepository : MaureaDataSource {
         password: String
     ): LiveData<ApiResponse<LoginResponse>> {
         val authResult: MutableLiveData<ApiResponse<LoginResponse>> = MutableLiveData()
-        val response = authRequest(email, password)
-        if (response.isSuccessful) {
-            val body = response.body()
-            if (body != null) {
-                authResult.value = ApiResponse.success(body)
-                SharedPrefUtils.saveString(
-                    Constanta.ACCESS_TOKEN,
-                    "Bearer " + body.loginResult?.token.toString()
-                )
-                Log.d("MaureaRepositorySuccess", "auth: ${body.loginResult?.token.toString()}")
+        try {
+            val response = authRequest(email, password)
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body != null) {
+                    authResult.value = ApiResponse.success(body)
+                    SharedPrefUtils.saveString(
+                        Constanta.ACCESS_TOKEN,
+                        "Bearer " + body.loginResult?.token.toString()
+                    )
+                    Log.d("MaureaRepositorySuccess", "auth: ${body.loginResult?.token.toString()}")
+                }
+            } else {
+                authResult.value = ApiResponse.error(response.message())
+                Log.d("MaureaRepositoryError", "auth: ${response.message()}")
             }
-        } else {
-            authResult.value = ApiResponse.error(response.message())
-            Log.d("MaureaRepositoryError", "auth: ${response.message()}")
+        } catch (e: Exception) {
+            Log.d("MaureaRepositoryError", "auth: ${e.message.toString()}")
         }
+
 
         return authResult
     }
@@ -58,14 +63,21 @@ class MaureaDataRepository : MaureaDataSource {
                     call: Call<RegisterResponse>,
                     response: Response<RegisterResponse>
                 ) {
-
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        if (body != null) {
+                            registerResult.value = ApiResponse.success(body)
+                            Log.d("RegisterSuccess", "registerUser: ${body.message.toString()}")
+                        }
+                    } else {
+                        registerResult.value = ApiResponse.error(response.message())
+                        Log.d("RegisterError", "registerUser: ${response.message()}")
+                    }
                 }
 
                 override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    registerResult.value = ApiResponse.error(t.message.toString())
                 }
-
-
             })
         return registerResult
 

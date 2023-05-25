@@ -19,15 +19,15 @@ interface ApiService {
         @Field("confirmPassword") confirmPassword: String,
     ): Call<RegisterResponse>
 
-//    @FormUrlEncoded
-//    @POST("login")
-//    suspend fun login(
-//        @Field("email") email: String,
-//        @Field("password") password: String,
-//    ): Response<LoginResponse>
-
+    @FormUrlEncoded
     @POST("login")
     suspend fun login(
-        @Body loginRequest: RequestBody
+        @Field("email") email: String,
+        @Field("password") password: String,
     ): Response<LoginResponse>
+
+//    @POST("login")
+//    suspend fun login(
+//        @Body loginRequest: RequestBody
+//    ): Response<LoginResponse>
 }

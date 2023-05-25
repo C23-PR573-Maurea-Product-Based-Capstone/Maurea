@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dwi.maurea.R
-import com.dwi.maurea.data.remote.response.ApiResponse
 import com.dwi.maurea.data.remote.response.StatusResponse
 import com.dwi.maurea.databinding.ActivityLoginBinding
 import com.dwi.maurea.ui.MainActivity
@@ -57,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
                                     startActivity(Intent(this, MainActivity::class.java))
                                     finish()
                                 }
+
                                 StatusResponse.ERROR -> {
                                     isLoading(false)
                                     Toast.makeText(
