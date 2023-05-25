@@ -24,6 +24,7 @@ class MaureaDataRepository : MaureaDataSource {
         password: String
     ): LiveData<ApiResponse<LoginResponse>> {
         val authResult: MutableLiveData<ApiResponse<LoginResponse>> = MutableLiveData()
+        authResult.value = ApiResponse.loading()
         try {
             val response = authRequest(email, password)
             if (response.isSuccessful) {
@@ -41,6 +42,7 @@ class MaureaDataRepository : MaureaDataSource {
                 Log.d("MaureaRepositoryError", "auth: ${response.message()}")
             }
         } catch (e: Exception) {
+            authResult.value = ApiResponse.error(e.message.toString())
             Log.d("MaureaRepositoryError", "auth: ${e.message.toString()}")
         }
 
