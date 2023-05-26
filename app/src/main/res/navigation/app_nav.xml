@@ -7,16 +7,16 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.dwi.maurea.ui.HomeFragment"
+        android:name="com.dwi.maurea.ui.home.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_market"
-        android:name="com.dwi.maurea.ui.MarketFragment"
+        android:name="com.dwi.maurea.ui.market.MarketFragment"
         tools:layout="@layout/fragment_market" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.dwi.maurea.ui.ProfileFragment"
+        android:name="com.dwi.maurea.ui.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile" />
 </navigation>

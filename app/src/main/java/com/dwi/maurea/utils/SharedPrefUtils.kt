@@ -8,7 +8,7 @@ object SharedPrefUtils {
     private fun pref(): SharedPreferences {
         return BaseApp.context!!.getSharedPreferences(
             // get application id
-            "com.dwi.maurea",
+            BaseApp.context!!.packageName,
             Context.MODE_PRIVATE
         )
     }

@@ -25,6 +25,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -45,17 +46,41 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
-    // network
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
-    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    // Network library
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
-    // lifecycle
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    def okhttp_version = "4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
 
-    // navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+    // Lifecycle library
+    def lifecycle_version = "2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+
+    // Navigation library
+    def navigation_version = "2.5.3"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    // CameraX core library
+    def camerax_version = "1.1.0-beta03"
+    implementation "androidx.camera:camera-core:$camerax_version"
+
+    // CameraX Camera2 extensions
+    implementation "androidx.camera:camera-camera2:$camerax_version"
+
+    // CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+
+    // CameraX View class
+    implementation "androidx.camera:camera-view:$camerax_version"
+
+    implementation 'org.tensorflow:tensorflow-lite-task-vision:0.4.0'
+    // Import the GPU delegate plugin Library for GPU inference
+    implementation 'org.tensorflow:tensorflow-lite-gpu-delegate-plugin:0.4.0'
+    implementation 'org.tensorflow:tensorflow-lite-gpu:2.9.0'
 }
