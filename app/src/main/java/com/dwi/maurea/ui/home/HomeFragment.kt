@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.dwi.maurea.R
 import com.dwi.maurea.databinding.FragmentHomeBinding
-import com.dwi.maurea.ui.detection.CameraActivity
+import com.dwi.maurea.ui.detection.DetectionActivity
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -28,7 +27,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.fabScan.setOnClickListener {
-            Intent(requireContext(), CameraActivity::class.java).also {
+            Intent(requireContext(), DetectionActivity::class.java).also {
                 startActivity(it)
             }
         }

@@ -13,7 +13,6 @@ import androidx.camera.core.Camera
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888
-import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -27,7 +26,7 @@ import java.util.LinkedList
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class CameraActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListener {
+class DetectionActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListener {
     private lateinit var binding: ActivityCameraBinding
     private lateinit var objectDetectorUtils: ObjectDetectorUtils
     private lateinit var bitmapBuffer: Bitmap
@@ -65,14 +64,14 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListener
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
-                this@CameraActivity,
+                this@DetectionActivity,
                 REQUIRED_PERMISSIONS,
                 REQUEST_CODE_PERMISSIONS,
             )
         }
 
         objectDetectorUtils = ObjectDetectorUtils(
-            context = this@CameraActivity,
+            context = this@DetectionActivity,
             objectDetectorListener = this
         )
 
@@ -91,7 +90,7 @@ class CameraActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListener
     }
 
     private fun setUpCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this@CameraActivity)
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this@DetectionActivity)
         cameraProviderFuture.addListener({
             cameraProvider = cameraProviderFuture.get()
 
