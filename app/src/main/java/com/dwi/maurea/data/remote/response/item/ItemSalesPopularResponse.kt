@@ -6,13 +6,12 @@ import com.google.gson.annotations.SerializedName
 
 @Parcelize
 data class ItemSalesPopularResponse(
-
 	@field:SerializedName("popItem")
-	val popItem: List<PopItemItem?>? = null
+	val popItem: ArrayList<ItemSalesPop>? = null
 ) : Parcelable
 
 @Parcelize
-data class PopItemItem(
+data class ItemSalesPop(
 
 	@field:SerializedName("Gambar")
 	val gambar: String? = null,

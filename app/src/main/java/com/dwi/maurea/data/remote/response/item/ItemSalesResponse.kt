@@ -7,11 +7,11 @@ import com.google.gson.annotations.SerializedName
 @Parcelize
 data class ItemSalesResponse(
 	@field:SerializedName("item")
-	val item: List<ItemItem?>? = null
+	val item: List<ItemSales>? = null
 ) : Parcelable
 
 @Parcelize
-data class ItemItem(
+data class ItemSales(
 
 	@field:SerializedName("Gambar")
 	val gambar: String? = null,

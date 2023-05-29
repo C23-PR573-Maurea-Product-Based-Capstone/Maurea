@@ -8,4 +8,6 @@ class HomeViewModel(application: Application): AndroidViewModel(application) {
     private val mMaureaDataRepository = MaureaDataRepository(application)
 
     fun getProfile() = mMaureaDataRepository.getProfile()
+
+    fun getPopularItems() = mMaureaDataRepository.getSalesItemPopular()
 }

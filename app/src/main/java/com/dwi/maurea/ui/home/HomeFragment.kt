@@ -7,13 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import com.dwi.maurea.data.remote.response.StatusResponse
 import com.dwi.maurea.databinding.FragmentHomeBinding
 import com.dwi.maurea.ui.detection.DetectionActivity
+import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels()
+    private lateinit var itemPopularAdapter: ItemPopularAdapter
 
 
     override fun onCreateView(
@@ -27,7 +31,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        itemPopularAdapter = ItemPopularAdapter()
         binding.fabScan.setOnClickListener {
             Intent(requireContext(), DetectionActivity::class.java).also {
                 startActivity(it)
@@ -35,6 +39,12 @@ class HomeFragment : Fragment() {
         }
 
         getProfile()
+        getItemPopular()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun getProfile() {
@@ -45,8 +55,36 @@ class HomeFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    private fun setUpAdapter() {
+        binding.rvPopular.apply {
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            setHasFixedSize(true)
+            this.adapter = itemPopularAdapter
+        }
+    }
+
+    private fun getItemPopular() {
+        viewModel.getPopularItems().observe(viewLifecycleOwner) { items ->
+            if (items != null) {
+                when (items.status) {
+                    StatusResponse.LOADING -> {
+                        // do nothing
+                    }
+
+                    StatusResponse.SUCCESS -> {
+                        setUpAdapter()
+                        items.body?.popItem?.let { itemPopularAdapter.setData(it) }
+                    }
+
+                    StatusResponse.ERROR -> {
+                        Snackbar.make(
+                            requireView(),
+                            "Terjadi kesalahan",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
     }
 }
