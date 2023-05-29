@@ -1,4 +1,4 @@
-package com.dwi.maurea.ui.login
+package com.dwi.maurea.ui.splash
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
+class SplashViewModel(application: Application) : AndroidViewModel(application) {
     private val mMaureaDataRepository = MaureaDataRepository(application)
 
     fun auth(email: String, password: String): LiveData<ApiResponse<LoginResponse>> {

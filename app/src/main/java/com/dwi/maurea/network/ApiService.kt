@@ -1,9 +1,9 @@
 package com.dwi.maurea.network
 
-import androidx.annotation.RawRes
 import com.dwi.maurea.data.remote.response.auth.LoginResponse
 import com.dwi.maurea.data.remote.response.auth.RegisterResponse
-import okhttp3.RequestBody
+import com.dwi.maurea.data.remote.response.item.ItemSalesPopularResponse
+import com.dwi.maurea.data.remote.response.item.ItemSalesResponse
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -11,7 +11,7 @@ import retrofit2.http.*
 interface ApiService {
 
     @FormUrlEncoded
-    @POST("users")
+    @POST("register")
     fun register(
         @Field("name") name: String,
         @Field("email") email: String,
@@ -26,8 +26,13 @@ interface ApiService {
         @Field("password") password: String,
     ): Response<LoginResponse>
 
-//    @POST("login")
-//    suspend fun login(
-//        @Body loginRequest: RequestBody
-//    ): Response<LoginResponse>
+    @GET("fruits")
+    fun getItemSales(
+        @Header("Authorization") authorization: String?,
+    ): Call<ItemSalesResponse>
+
+    @GET("fruits/popular")
+    fun getItemSalesPopular(
+        @Header("Authorization") authorization: String?,
+    ): Call<ItemSalesPopularResponse>
 }

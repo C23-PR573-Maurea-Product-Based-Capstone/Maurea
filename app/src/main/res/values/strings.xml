@@ -21,4 +21,7 @@
     <string name="ikon_untuk_notifikasi">ikon untuk notifikasi</string>
     <string name="yang_lagi_laris">Yang lagi laris</string>
     <string name="gambar_item_yang_dijual">gambar item yang dijual</string>
+    <string name="email_tidak_boleh_kosong">Email tidak boleh kosong</string>
+    <string name="password_tidak_boleh_kosong">Password tidak boleh kosong</string>
+    <string name="password_minimal_8_karakter">Password minimal 8 karakter</string>
 </resources>

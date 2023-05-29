@@ -8,10 +8,15 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.dwi.maurea.R
+import com.dwi.maurea.data.local.entitiy.ProfileEntity
 import com.dwi.maurea.data.remote.response.StatusResponse
+import com.dwi.maurea.data.remote.response.auth.LoginResult
 import com.dwi.maurea.databinding.ActivityLoginBinding
 import com.dwi.maurea.ui.MainActivity
 import com.dwi.maurea.ui.register.RegisterActivity
+import com.dwi.maurea.utils.Constanta.EMAIL
+import com.dwi.maurea.utils.Constanta.PASSWORD
+import com.dwi.maurea.utils.SharedPrefUtils
 import com.dwi.maurea.utils.TextUtils.setBoldClickableText
 
 class LoginActivity : AppCompatActivity() {
@@ -48,6 +53,11 @@ class LoginActivity : AppCompatActivity() {
 
                                 StatusResponse.SUCCESS -> {
                                     isLoading(false)
+                                    SharedPrefUtils.saveString(
+                                        EMAIL, email.toString()
+                                    )
+                                    SharedPrefUtils.saveString(PASSWORD, password.toString())
+                                    insertToLocal(login.body?.loginResult)
                                     Toast.makeText(
                                         this,
                                         "Login berhasil",
@@ -76,17 +86,17 @@ class LoginActivity : AppCompatActivity() {
 
         when {
             etEmail.isNullOrEmpty() -> {
-                Toast.makeText(this, "Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.email_tidak_boleh_kosong), Toast.LENGTH_SHORT).show()
                 return false
             }
 
             etPassword.isNullOrEmpty() -> {
-                Toast.makeText(this, "Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.password_tidak_boleh_kosong), Toast.LENGTH_SHORT).show()
                 return false
             }
 
             etPassword.length < 8 -> {
-                binding.etPassword.error = "Password minimal 8 karakter"
+                binding.etPassword.error = getString(R.string.password_minimal_8_karakter)
                 return false
             }
 
@@ -100,6 +110,15 @@ class LoginActivity : AppCompatActivity() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
+    }
+
+    private fun insertToLocal(loginResult: LoginResult?) {
+        val profileEntity = ProfileEntity(
+            id = 0,
+            name = loginResult?.name,
+            email = loginResult?.email,
+        )
+        viewModel.insertUsers(profileEntity)
     }
 
 }
