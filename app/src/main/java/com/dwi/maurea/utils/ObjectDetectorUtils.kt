@@ -3,6 +3,7 @@ package com.dwi.maurea.utils
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.SystemClock
+import android.util.Log
 import org.tensorflow.lite.support.image.ImageProcessor
 import org.tensorflow.lite.support.image.TensorImage
 import org.tensorflow.lite.support.image.ops.Rot90Op
@@ -32,13 +33,14 @@ class ObjectDetectorUtils(
 
         optionsBuilder.setBaseOptions(baseOptionBuilder.build())
 
-        val modelName = "mobilenet.tflite"
+        val modelName = "modeldummy.tflite"
 
         try {
             objectDetector =
                 ObjectDetector.createFromFileAndOptions(context, modelName, optionsBuilder.build())
         } catch (e: IllegalStateException) {
             objectDetectorListener?.onError(e.message.toString())
+            Log.d("ObjectDetectorUtils", e.message.toString())
         }
     }
 

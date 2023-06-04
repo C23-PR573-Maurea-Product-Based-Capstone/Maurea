@@ -3,6 +3,12 @@
     <style name="Base.Theme.Maurea" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
 
+<!--        <item name="colorSurface">?attr/colorPrimary</item>-->
+        <item name="materialThemeOverlay">@style/ThemeOverlay.DisableNightMode</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
+<!--        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
+        <item name="textAppearanceTitleLarge">@style/CustomAppBarTitle</item>
+
     </style>
 
     <style name="BottomNavigationViewTextStyle">
@@ -10,4 +16,17 @@
     </style>
 
     <style name="Theme.Maurea" parent="Base.Theme.Maurea" />
+
+    <style name="Theme.Maurea.Transparent" parent="Theme.Maurea">
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
+    </style>
+
+    <style name="CustomAppBarTitle" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/poppins_medium</item>
+    </style>
+
+    <style name="ThemeOverlay.DisableNightMode" parent="">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+    </style>
 </resources>

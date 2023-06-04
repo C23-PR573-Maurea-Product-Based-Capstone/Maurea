@@ -4,8 +4,10 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.AspectRatio
@@ -18,7 +20,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.dwi.maurea.databinding.ActivityCameraBinding
+import com.dwi.maurea.databinding.ActivityDetectionBinding
 import com.dwi.maurea.utils.ObjectDetectorUtils
 import org.tensorflow.lite.task.vision.detector.Detection
 import java.lang.IllegalStateException
@@ -27,16 +29,14 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 class DetectionActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListener {
-    private lateinit var binding: ActivityCameraBinding
+    private lateinit var binding: ActivityDetectionBinding
     private lateinit var objectDetectorUtils: ObjectDetectorUtils
     private lateinit var bitmapBuffer: Bitmap
+    private lateinit var cameraExecutor: ExecutorService
     private var preview: Preview? = null
     private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
-
-    private lateinit var cameraExecutor: ExecutorService
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -59,7 +59,7 @@ class DetectionActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListe
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCameraBinding.inflate(layoutInflater)
+        binding = ActivityDetectionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (!allPermissionsGranted()) {
@@ -80,6 +80,10 @@ class DetectionActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListe
 
         binding.viewFinder.post {
             setUpCamera()
+        }
+
+        binding.toolbar.setNavigationOnClickListener {
+            finish()
         }
     }
 

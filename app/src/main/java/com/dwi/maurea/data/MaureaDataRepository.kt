@@ -12,6 +12,7 @@ import com.dwi.maurea.data.remote.response.auth.LoginResponse
 import com.dwi.maurea.data.remote.response.auth.RegisterResponse
 import com.dwi.maurea.data.remote.response.item.ItemSalesPopularResponse
 import com.dwi.maurea.data.remote.response.item.ItemSalesResponse
+import com.dwi.maurea.data.remote.response.item.ItemSearchResponse
 import com.dwi.maurea.network.ApiConfig.getService
 import com.dwi.maurea.utils.Constanta.ACCESS_TOKEN
 import com.dwi.maurea.utils.SharedPrefUtils
@@ -163,6 +164,41 @@ class MaureaDataRepository(application: Application) : MaureaDataSource {
             })
 
         return itemPopular
+    }
+
+    override fun getSearchFruits(query: String): LiveData<ApiResponse<ItemSalesResponse>> {
+        val searchResult: MutableLiveData<ApiResponse<ItemSalesResponse>> = MutableLiveData()
+
+        searchResult.value = ApiResponse.loading()
+
+        getService().searchFruits(
+            SharedPrefUtils.getString(ACCESS_TOKEN),
+            query
+        ).enqueue(object : Callback<ItemSalesResponse> {
+            override fun onResponse(
+                call: Call<ItemSalesResponse>,
+                response: Response<ItemSalesResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        searchResult.value = ApiResponse.success(body)
+                        Log.d("SearchSuccess", "getSearchFruits: $body")
+                    }
+                } else {
+                    searchResult.value = ApiResponse.error(response.message())
+                    Log.d("SearchError", "getSearchFruits: ${response.message()}")
+                }
+            }
+
+            override fun onFailure(call: Call<ItemSalesResponse>, t: Throwable) {
+                searchResult.value = ApiResponse.error(t.message.toString())
+                Log.d("SearchFailure", "getSearchFruits: ${t.message.toString()}")
+            }
+        })
+
+
+        return searchResult
     }
 
 }

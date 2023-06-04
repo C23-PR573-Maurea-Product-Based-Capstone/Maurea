@@ -12,6 +12,8 @@ data class ItemSalesPopularResponse(
 
 @Parcelize
 data class ItemSalesPop(
+	@field:SerializedName("id")
+	val id: String? = null,
 
 	@field:SerializedName("Gambar")
 	val gambar: String? = null,

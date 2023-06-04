@@ -32,6 +32,10 @@ class MarketFragment : Fragment() {
         itemSalesAdapter = ItemSalesAdapter()
         getAllItemSales()
 
+        binding.apply {
+
+        }
+
     }
 
     override fun onDestroyView() {
@@ -49,6 +53,31 @@ class MarketFragment : Fragment() {
 
     private fun getAllItemSales() {
         viewModel.getAllItemSales().observe(viewLifecycleOwner) { item ->
+            if (item != null) {
+                when (item.status) {
+                    StatusResponse.LOADING -> {
+                        // do nothing
+                    }
+
+                    StatusResponse.SUCCESS -> {
+                        setUpAdapter()
+                        item.body?.item?.let { itemSalesAdapter.setData(it) }
+                    }
+
+                    StatusResponse.ERROR -> {
+                        Snackbar.make(
+                            requireView(),
+                            "Terjadi kesalahan",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun getSearchItems(query: String) {
+        viewModel.getSearchItems(query).observe(viewLifecycleOwner) { item ->
             if (item != null) {
                 when (item.status) {
                     StatusResponse.LOADING -> {

@@ -12,6 +12,8 @@ data class ItemSalesResponse(
 
 @Parcelize
 data class ItemSales(
+	@field:SerializedName("id")
+	val id: String? = null,
 
 	@field:SerializedName("Gambar")
 	val gambar: String? = null,

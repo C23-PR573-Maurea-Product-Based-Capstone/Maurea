@@ -8,4 +8,6 @@ class MarketViewModel(application: Application): AndroidViewModel(application) {
     private val mMaureaDataRepository = MaureaDataRepository(application)
 
     fun getAllItemSales() = mMaureaDataRepository.getSalesItem()
+
+    fun getSearchItems(query: String) = mMaureaDataRepository.getSearchFruits(query)
 }
