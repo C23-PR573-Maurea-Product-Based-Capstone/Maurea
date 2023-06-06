@@ -21,4 +21,6 @@ object SharedPrefUtils {
     fun getString(key: String): String? = pref().getString(key, null)
 
     fun clear() = edit().clear().apply()
+
+    fun remove(key: String) = edit().remove(key).apply()
 }

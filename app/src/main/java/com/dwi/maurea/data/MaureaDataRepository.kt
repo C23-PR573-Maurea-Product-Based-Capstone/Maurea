@@ -15,6 +15,8 @@ import com.dwi.maurea.data.remote.response.item.ItemSalesResponse
 import com.dwi.maurea.data.remote.response.item.ItemSearchResponse
 import com.dwi.maurea.network.ApiConfig.getService
 import com.dwi.maurea.utils.Constanta.ACCESS_TOKEN
+import com.dwi.maurea.utils.Constanta.EMAIL
+import com.dwi.maurea.utils.Constanta.USERNAME
 import com.dwi.maurea.utils.SharedPrefUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -47,6 +49,11 @@ class MaureaDataRepository(application: Application) : MaureaDataSource {
                     SharedPrefUtils.saveString(
                         ACCESS_TOKEN,
                         "Bearer " + body.loginResult?.token.toString()
+                    )
+                    SharedPrefUtils.saveString(USERNAME, body.loginResult?.name.toString())
+                    SharedPrefUtils.saveString(
+                        EMAIL,
+                        body.loginResult?.email.toString()
                     )
                     Log.d("MaureaRepositorySuccess", "auth: ${body.loginResult?.token.toString()}")
                 }

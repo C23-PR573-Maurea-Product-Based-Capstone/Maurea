@@ -4,6 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bounding_box_color">#FF6F00</color>
     <color name="colorPrimary">#00676C</color>
-    <color name="colorPrimaryVariant">#E91E63</color>
+    <color name="colorPrimaryVariant">#000000</color>
 
 </resources>

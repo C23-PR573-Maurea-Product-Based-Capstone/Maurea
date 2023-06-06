@@ -24,4 +24,7 @@
     <string name="email_tidak_boleh_kosong">Email tidak boleh kosong</string>
     <string name="password_tidak_boleh_kosong">Password tidak boleh kosong</string>
     <string name="password_minimal_8_karakter">Password minimal 8 karakter</string>
+    <string name="login_error">Login gagal, periksa kembali koneksi internet anda</string>
+    <string name="keluar">Keluar</string>
+    <string name="username">Username</string>
 </resources>

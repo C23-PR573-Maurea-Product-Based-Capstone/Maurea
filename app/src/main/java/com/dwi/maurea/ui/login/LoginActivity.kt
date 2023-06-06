@@ -42,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text
             val password = binding.etPassword.text
+            isLoading(true)
             if (isFieldValid(email, password)) {
                 viewModel.auth(email.toString(), password.toString())
                     .observe(this@LoginActivity) { login ->
@@ -71,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
                                     isLoading(false)
                                     Toast.makeText(
                                         this,
-                                        login.message,
+                                        getString(R.string.login_error),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
