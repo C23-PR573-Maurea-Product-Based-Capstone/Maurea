@@ -56,9 +56,10 @@ class SplashActivity : AppCompatActivity() {
                         StatusResponse.ERROR -> {
                             Toast.makeText(
                                 this,
-                                splash.message,
+                                "Terjadi kesalahan, silahkan cek koneksi internet anda",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            finish()
                         }
                     }
                 }

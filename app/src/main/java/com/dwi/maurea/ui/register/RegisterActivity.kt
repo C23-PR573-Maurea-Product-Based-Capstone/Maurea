@@ -78,6 +78,11 @@ class RegisterActivity : AppCompatActivity() {
                 return false
             }
 
+            !android.util.Patterns.EMAIL_ADDRESS.matcher(etEmail).matches() -> {
+                Toast.makeText(this, "Email tidak valid", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
             etName.isNullOrEmpty() -> {
                 Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
                 return false
@@ -107,11 +112,11 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun isLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
+    private fun isLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.show()
         } else {
-            binding.progressBar.visibility = View.GONE
+            binding.progressBar.hide()
         }
     }
 }

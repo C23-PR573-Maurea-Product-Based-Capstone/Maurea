@@ -27,4 +27,6 @@
     <string name="login_error">Login gagal, periksa kembali koneksi internet anda</string>
     <string name="keluar">Keluar</string>
     <string name="username">Username</string>
+    <string name="login_berhasil">Login berhasil</string>
+    <string name="error_network">Terjadi kesalahan, silahkan cek koneksi internet anda</string>
 </resources>

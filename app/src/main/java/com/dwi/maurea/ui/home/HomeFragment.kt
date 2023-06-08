@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.dwi.maurea.R
 import com.dwi.maurea.data.remote.response.StatusResponse
 import com.dwi.maurea.databinding.FragmentHomeBinding
 import com.dwi.maurea.ui.detection.DetectionActivity
@@ -68,23 +69,33 @@ class HomeFragment : Fragment() {
             if (items != null) {
                 when (items.status) {
                     StatusResponse.LOADING -> {
-                        // do nothing
+                        isLoading(true)
                     }
 
                     StatusResponse.SUCCESS -> {
+                        isLoading(false)
                         setUpAdapter()
                         items.body?.popItem?.let { itemPopularAdapter.setData(it) }
                     }
 
                     StatusResponse.ERROR -> {
+                        isLoading(false)
                         Snackbar.make(
                             requireView(),
-                            "Terjadi kesalahan",
+                            getString(R.string.error_network),
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
                 }
             }
+        }
+    }
+
+    private fun isLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.show()
+        } else {
+            binding.progressBar.hide()
         }
     }
 }

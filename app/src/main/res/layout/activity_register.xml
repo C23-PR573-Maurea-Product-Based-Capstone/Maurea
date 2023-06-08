@@ -2,9 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbars="none"
-    android:layout_width="match_parent">
+    android:scrollbars="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -92,13 +92,15 @@
             app:boxCornerRadiusTopStart="12dp"
             app:layout_constraintEnd_toEndOf="@id/tv_register"
             app:layout_constraintStart_toStartOf="@id/tv_register"
-            app:layout_constraintTop_toBottomOf="@+id/ti_name">
+            app:layout_constraintTop_toBottomOf="@+id/ti_name"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular" />
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -114,13 +116,15 @@
             app:boxCornerRadiusTopStart="12dp"
             app:layout_constraintEnd_toEndOf="@id/tv_register"
             app:layout_constraintStart_toStartOf="@id/tv_register"
-            app:layout_constraintTop_toBottomOf="@+id/ti_password">
+            app:layout_constraintTop_toBottomOf="@+id/ti_password"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_confirm_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_regular" />
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -149,15 +153,19 @@
             app:layout_constraintTop_toBottomOf="@id/btn_register"
             tools:text="@string/sudah_punya_akun_masuk" />
 
-        <ProgressBar
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:indeterminate="true"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackCornerRadius="@dimen/cardview_default_radius" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

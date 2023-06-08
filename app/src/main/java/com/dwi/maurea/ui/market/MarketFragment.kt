@@ -56,15 +56,17 @@ class MarketFragment : Fragment() {
             if (item != null) {
                 when (item.status) {
                     StatusResponse.LOADING -> {
-                        // do nothing
+                        isLoading(true)
                     }
 
                     StatusResponse.SUCCESS -> {
+                        isLoading(false)
                         setUpAdapter()
                         item.body?.item?.let { itemSalesAdapter.setData(it) }
                     }
 
                     StatusResponse.ERROR -> {
+                        isLoading(false)
                         Snackbar.make(
                             requireView(),
                             "Terjadi kesalahan",
@@ -92,12 +94,20 @@ class MarketFragment : Fragment() {
                     StatusResponse.ERROR -> {
                         Snackbar.make(
                             requireView(),
-                            "Terjadi kesalahan",
+                            getString(R.string.error_network),
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
                 }
             }
+        }
+    }
+
+    private fun isLoading(state: Boolean) {
+        if (state) {
+            binding.progressBar.show()
+        } else {
+            binding.progressBar.hide()
         }
     }
 }

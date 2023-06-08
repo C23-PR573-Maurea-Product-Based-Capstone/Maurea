@@ -61,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                                     insertToLocal(login.body?.loginResult)
                                     Toast.makeText(
                                         this,
-                                        "Login berhasil",
+                                        getString(R.string.login_berhasil),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     startActivity(Intent(this, MainActivity::class.java))
@@ -105,11 +105,12 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun isLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
+    private fun isLoading(state: Boolean) {
+        binding.progressBar.visibility = View.GONE
+        if (state) {
+            binding.progressBar.show()
         } else {
-            binding.progressBar.visibility = View.GONE
+            binding.progressBar.hide()
         }
     }
 
