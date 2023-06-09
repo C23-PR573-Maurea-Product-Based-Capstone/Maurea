@@ -33,7 +33,7 @@ class ObjectDetectorUtils(
 
         optionsBuilder.setBaseOptions(baseOptionBuilder.build())
 
-        val modelName = "mobilenetv1.tflite"
+        val modelName = "othervmetadata.tflite"
 
         try {
             objectDetector =
