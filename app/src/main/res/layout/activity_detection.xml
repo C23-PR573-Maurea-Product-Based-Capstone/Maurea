@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.detection.DetectionActivity">
+    tools:context=".ui.scan.detection.DetectionActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -19,7 +19,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="Scan ur fruits"
+            app:title="@string/scan_your_s"
+            app:titleCentered="true"
             app:titleTextColor="@color/white"
             android:background="?attr/colorPrimary"
             app:titleTextAppearance="@style/CustomAppBarTitle"

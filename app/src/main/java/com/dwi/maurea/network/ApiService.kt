@@ -4,6 +4,7 @@ import com.dwi.maurea.data.remote.response.auth.LoginResponse
 import com.dwi.maurea.data.remote.response.auth.RegisterResponse
 import com.dwi.maurea.data.remote.response.item.ItemSalesPopularResponse
 import com.dwi.maurea.data.remote.response.item.ItemSalesResponse
+import com.dwi.maurea.data.remote.response.item.ItemScanResponse
 import com.dwi.maurea.data.remote.response.item.ItemSearchResponse
 import retrofit2.Call
 import retrofit2.Response
@@ -42,4 +43,9 @@ interface ApiService {
         @Header("Authorization") authorization: String?,
         @Query("Nama") query: String,
     ): Call<ItemSalesResponse>
+
+    @GET("detection")
+    fun fruitsScan(
+        @Header("Authorization") authorization: String?
+    ): Call<ItemScanResponse>
 }

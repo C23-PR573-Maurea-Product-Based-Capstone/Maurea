@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.dwi.maurea.R
 import com.dwi.maurea.data.remote.response.StatusResponse
 import com.dwi.maurea.databinding.FragmentHomeBinding
-import com.dwi.maurea.ui.detection.DetectionActivity
+import com.dwi.maurea.ui.scan.detection.DetectionActivity
+import com.dwi.maurea.ui.scan.fruits.FruitsChoiceActivity
 import com.google.android.material.snackbar.Snackbar
 
 class HomeFragment : Fragment() {
@@ -34,7 +35,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         itemPopularAdapter = ItemPopularAdapter()
         binding.fabScan.setOnClickListener {
-            Intent(requireContext(), DetectionActivity::class.java).also {
+            Intent(requireContext(), FruitsChoiceActivity::class.java).also {
                 startActivity(it)
             }
         }

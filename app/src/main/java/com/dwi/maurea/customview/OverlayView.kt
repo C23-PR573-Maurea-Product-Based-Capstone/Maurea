@@ -51,7 +51,9 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
 
         boxPaint.apply {
             //set primary color
-            color = ContextCompat.getColor(context!!, R.color.bounding_box_color)
+//            color = ContextCompat.getColor(context!!, R.color.bounding_box_color)
+            color = Color.GREEN
+
             strokeWidth = 8F
             style = Paint.Style.STROKE
         }

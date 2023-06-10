@@ -29,4 +29,5 @@
     <string name="username">Username</string>
     <string name="login_berhasil">Login berhasil</string>
     <string name="error_network">Terjadi kesalahan, silahkan cek koneksi internet anda</string>
+    <string name="scan_your_s">Scan your %s</string>
 </resources>

@@ -6,4 +6,5 @@ object Constanta {
     const val USERNAME = "username"
     const val EMAIL = "email"
     const val PASSWORD = "password"
+    const val MODEL = "model"
 }

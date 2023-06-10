@@ -94,7 +94,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             etPassword.length < 8 -> {
-                binding.etPassword.error = "Password minimal 8 karakter"
+                Toast.makeText(this, "Password minimal 8 karakter", Toast.LENGTH_SHORT).show()
                 return false
             }
 
