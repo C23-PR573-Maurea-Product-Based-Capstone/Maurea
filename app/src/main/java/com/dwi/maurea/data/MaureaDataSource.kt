@@ -8,7 +8,7 @@ import com.dwi.maurea.data.remote.response.auth.RegisterResponse
 import com.dwi.maurea.data.remote.response.item.ItemSalesPopularResponse
 import com.dwi.maurea.data.remote.response.item.ItemSalesResponse
 import com.dwi.maurea.data.remote.response.item.ItemScanResponse
-import com.dwi.maurea.data.remote.response.item.ItemSearchResponse
+import com.dwi.maurea.data.remote.response.item.SearchItem
 import retrofit2.Response
 
 interface MaureaDataSource {
@@ -31,7 +31,7 @@ interface MaureaDataSource {
 
     fun getSalesItemPopular(): LiveData<ApiResponse<ItemSalesPopularResponse>>
 
-    fun getSearchFruits(query: String): LiveData<ApiResponse<ItemSalesResponse>>
+    fun getSearchFruits(query: String): LiveData<ApiResponse<ArrayList<SearchItem>>>
 
     fun getFruitsScan(): LiveData<ApiResponse<ItemScanResponse>>
 }

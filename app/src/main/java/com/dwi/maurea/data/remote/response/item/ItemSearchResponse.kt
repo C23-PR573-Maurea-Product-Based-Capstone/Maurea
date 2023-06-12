@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 data class ItemSearchResponse(
 
 	@field:SerializedName("search")
-	val search: List<SearchItem>? = null
+	val search: ArrayList<SearchItem>? = null
 ) : Parcelable
 
 @Parcelize

@@ -10,10 +10,12 @@ import com.dwi.maurea.data.local.room.MaureaDatabase
 import com.dwi.maurea.data.remote.response.ApiResponse
 import com.dwi.maurea.data.remote.response.auth.LoginResponse
 import com.dwi.maurea.data.remote.response.auth.RegisterResponse
+import com.dwi.maurea.data.remote.response.item.ItemSales
 import com.dwi.maurea.data.remote.response.item.ItemSalesPopularResponse
 import com.dwi.maurea.data.remote.response.item.ItemSalesResponse
 import com.dwi.maurea.data.remote.response.item.ItemScanResponse
 import com.dwi.maurea.data.remote.response.item.ItemSearchResponse
+import com.dwi.maurea.data.remote.response.item.SearchItem
 import com.dwi.maurea.network.ApiConfig.getService
 import com.dwi.maurea.utils.Constanta.ACCESS_TOKEN
 import com.dwi.maurea.utils.Constanta.EMAIL
@@ -174,24 +176,24 @@ class MaureaDataRepository(application: Application) : MaureaDataSource {
         return itemPopular
     }
 
-    override fun getSearchFruits(query: String): LiveData<ApiResponse<ItemSalesResponse>> {
-        val searchResult: MutableLiveData<ApiResponse<ItemSalesResponse>> = MutableLiveData()
+    override fun getSearchFruits(query: String): LiveData<ApiResponse<ArrayList<SearchItem>>> {
+        val searchResult = MutableLiveData<ApiResponse<ArrayList<SearchItem>>>()
 
         searchResult.value = ApiResponse.loading()
 
         getService().searchFruits(
             SharedPrefUtils.getString(ACCESS_TOKEN),
             query
-        ).enqueue(object : Callback<ItemSalesResponse> {
+        ).enqueue(object : Callback<ItemSearchResponse> {
             override fun onResponse(
-                call: Call<ItemSalesResponse>,
-                response: Response<ItemSalesResponse>
+                call: Call<ItemSearchResponse>,
+                response: Response<ItemSearchResponse>
             ) {
                 if (response.isSuccessful) {
                     val body = response.body()
                     if (body != null) {
-                        searchResult.value = ApiResponse.success(body)
-                        Log.d("SearchSuccess", "getSearchFruits: $body")
+                        searchResult.value = ApiResponse.success(body.search!!)
+                        Log.d("SearchSuccess", "getSearchFruits: ${body.search}")
                     }
                 } else {
                     searchResult.value = ApiResponse.error(response.message())
@@ -199,7 +201,7 @@ class MaureaDataRepository(application: Application) : MaureaDataSource {
                 }
             }
 
-            override fun onFailure(call: Call<ItemSalesResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ItemSearchResponse>, t: Throwable) {
                 searchResult.value = ApiResponse.error(t.message.toString())
                 Log.d("SearchFailure", "getSearchFruits: ${t.message.toString()}")
             }
@@ -223,6 +225,7 @@ class MaureaDataRepository(application: Application) : MaureaDataSource {
                     val body = response.body()
                     if(body != null) {
                         fruitsResult.value = ApiResponse.success(body)
+//                        fruitsResult.postValue(ApiResponse.success(body))
                         Log.d("FruitsScan", "Fruits: $body")
                     }
                 } else {

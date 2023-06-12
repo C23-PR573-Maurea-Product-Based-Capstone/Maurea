@@ -42,7 +42,7 @@ interface ApiService {
     fun searchFruits(
         @Header("Authorization") authorization: String?,
         @Query("Nama") query: String,
-    ): Call<ItemSalesResponse>
+    ): Call<ItemSearchResponse>
 
     @GET("detection")
     fun fruitsScan(
