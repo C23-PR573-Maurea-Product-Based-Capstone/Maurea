@@ -23,7 +23,7 @@ import com.dwi.maurea.databinding.ActivityDetectionBinding
 import com.dwi.maurea.utils.Constanta.MODEL
 import com.dwi.maurea.utils.ObjectDetectorUtils
 import com.dwi.maurea.utils.ObjectDetectorUtils.Companion.MODEL_DRAGON_FRUIT
-import com.dwi.maurea.utils.ObjectDetectorUtils.Companion.MODEL_MANGO
+import com.dwi.maurea.utils.ObjectDetectorUtils.Companion.MODEL_WATERMELON
 import com.dwi.maurea.utils.ObjectDetectorUtils.Companion.MODEL_PAPAYA
 import com.dwi.maurea.utils.ObjectDetectorUtils.Companion.MODEL_TOMATO
 import org.tensorflow.lite.task.vision.detector.Detection
@@ -85,7 +85,7 @@ class DetectionActivity : AppCompatActivity(), ObjectDetectorUtils.DetectorListe
             val currentModelUsed = when (model) {
                 "Pepaya" -> MODEL_PAPAYA
                 "Buah Naga" -> MODEL_DRAGON_FRUIT
-                "Mangga" -> MODEL_MANGO
+                "Semangka" -> MODEL_WATERMELON
                 "Tomat" -> MODEL_TOMATO
                 else -> MODEL_PAPAYA
             }

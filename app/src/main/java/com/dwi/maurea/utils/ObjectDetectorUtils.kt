@@ -42,7 +42,7 @@ class ObjectDetectorUtils(
             when (currentModel) {
                 MODEL_PAPAYA -> "papaya.tflite"
                 MODEL_DRAGON_FRUIT -> "dragon_fruit.tflite"
-                MODEL_MANGO -> "mango.tflite"
+                MODEL_WATERMELON -> "watermelon.tflite"
                 MODEL_TOMATO -> "tomato.tflite"
                 else -> "papaya.tflite"
             }
@@ -95,7 +95,7 @@ class ObjectDetectorUtils(
     companion object {
         const val MODEL_PAPAYA = "papaya"
         const val MODEL_DRAGON_FRUIT = "dragon_fruit"
-        const val MODEL_MANGO = "mango"
+        const val MODEL_WATERMELON = "watermelon"
         const val MODEL_TOMATO = "tomato"
     }
 
