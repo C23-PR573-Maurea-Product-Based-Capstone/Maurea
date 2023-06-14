@@ -36,9 +36,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        binding.etEmail.setText("dwe@gmail.com")
-        binding.etPassword.setText("password123")
-
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text
             val password = binding.etPassword.text
