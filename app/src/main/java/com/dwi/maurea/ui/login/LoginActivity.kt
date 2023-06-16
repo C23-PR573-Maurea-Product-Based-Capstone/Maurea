@@ -39,8 +39,8 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text
             val password = binding.etPassword.text
-            isLoading(true)
             if (isFieldValid(email, password)) {
+                isLoading(true)
                 viewModel.auth(email.toString(), password.toString())
                     .observe(this@LoginActivity) { login ->
                         if (login != null) {
