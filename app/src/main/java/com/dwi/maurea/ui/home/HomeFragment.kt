@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         itemPopularAdapter = ItemPopularAdapter()
         binding.fabScan.setOnClickListener {
-            Intent(requireContext(), FruitsChoiceActivity::class.java).also {
+            Intent(requireContext(), DetectionActivity::class.java).also {
                 startActivity(it)
             }
         }

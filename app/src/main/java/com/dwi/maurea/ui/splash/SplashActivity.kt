@@ -27,12 +27,7 @@ class SplashActivity : AppCompatActivity() {
         val email = SharedPrefUtils.getString(EMAIL)
         val password = SharedPrefUtils.getString(PASSWORD)
         Handler(mainLooper).postDelayed({
-            if (email.isNullOrEmpty() || password.isNullOrEmpty()) {
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            } else {
-                getAuthUser(email, password)
-            }
+            startActivity(Intent(this, MainActivity::class.java))
         }, 3000)
     }
 
