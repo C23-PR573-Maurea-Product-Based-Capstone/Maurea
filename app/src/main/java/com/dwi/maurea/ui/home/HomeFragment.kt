@@ -40,8 +40,8 @@ class HomeFragment : Fragment() {
             }
         }
 
-        getProfile()
-        getItemPopular()
+//        getProfile()
+//        getItemPopular()
     }
 
     override fun onDestroyView() {

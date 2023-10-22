@@ -7,6 +7,7 @@ import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import com.dwi.maurea.R
@@ -74,9 +75,16 @@ class OverlayView(context: Context?, attrs: AttributeSet?) : View(context, attrs
             val drawableRect = RectF(left, top, right, bottom)
             canvas.drawRect(drawableRect, boxPaint)
 
+            val resultIndo = when (result.categories[0].label) {
+                "unripe" -> "mentah"
+                "ripe" -> "matang"
+                "damaged" -> "busuk"
+                else -> "matang"
+            }
+
             // create text to display alongside detected objects
             val drawableText =
-                result.categories[0].label + " " + String.format("%.2f", result.categories[0].score)
+                resultIndo + " " + String.format("%.2f", result.categories[0].score)
 
             // Draw rect behind display text
             textBackgroundPaint.getTextBounds(drawableText, 0, drawableText.length, bounds)
