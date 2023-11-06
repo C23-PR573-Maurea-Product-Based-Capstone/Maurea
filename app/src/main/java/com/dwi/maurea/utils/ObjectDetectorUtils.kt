@@ -12,9 +12,9 @@ import org.tensorflow.lite.task.vision.detector.Detection
 import org.tensorflow.lite.task.vision.detector.ObjectDetector
 
 class ObjectDetectorUtils(
-    var threshold: Float = 0.5f,
-    var numThreads: Int = 2,
-    var maxResults: Int = 3,
+    private var threshold: Float = 0.3f,
+    private var numThreads: Int = 2,
+    private var maxResults: Int = 3,
     var currentModel: String = MODEL_PAPAYA,
     val context: Context,
     val objectDetectorListener: DetectorListener?

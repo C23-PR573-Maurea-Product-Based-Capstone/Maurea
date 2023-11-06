@@ -1,4 +1,4 @@
-package com.dwi.maurea.ui.scan.detection
+package com.dwi.maurea.ui.detection
 
 import android.Manifest
 import android.content.pm.PackageManager

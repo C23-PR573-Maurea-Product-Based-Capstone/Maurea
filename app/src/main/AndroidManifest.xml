@@ -22,7 +22,7 @@
             android:name=".ui.scan.fruits.FruitsChoiceActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.scan.detection.DetectionActivity"
+            android:name=".ui.detection.DetectionActivity"
             android:exported="false"
             android:theme="@style/Theme.Maurea.Transparent" />
         <activity

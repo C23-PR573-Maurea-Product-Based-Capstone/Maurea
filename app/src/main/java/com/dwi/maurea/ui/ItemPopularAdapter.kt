@@ -1,26 +1,26 @@
-package com.dwi.maurea.ui.scan.fruits
+package com.dwi.maurea.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.dwi.maurea.data.remote.response.item.ItemScan
+import com.dwi.maurea.data.local.ItemScan
 import com.dwi.maurea.databinding.ItemFruitsBinding
 import com.dwi.maurea.utils.DiffUtils
-import com.dwi.maurea.utils.ObjectDetectorUtils
 
-class FruitsChoiceAdapter : RecyclerView.Adapter<FruitsChoiceAdapter.FruitsChoiceViewHolder>() {
+class ItemPopularAdapter : RecyclerView.Adapter<ItemPopularAdapter.ItemViewHolder>() {
     private var oldList = emptyList<ItemScan>()
     private var onItemClickCallback: OnItemClickCallback? = null
 
-    inner class FruitsChoiceViewHolder(private val binding: ItemFruitsBinding) :
+    inner class ItemViewHolder(private val binding: ItemFruitsBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ItemScan) {
             binding.apply {
                 tvItemName.text = item.nama
                 ivItemFruits.load(item.gambar)
             }
+
             itemView.setOnClickListener {
                 onItemClickCallback?.onItemClicked(item)
             }
@@ -28,24 +28,18 @@ class FruitsChoiceAdapter : RecyclerView.Adapter<FruitsChoiceAdapter.FruitsChoic
 
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): FruitsChoiceAdapter.FruitsChoiceViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val itemFruitsBinding =
             ItemFruitsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return FruitsChoiceViewHolder(itemFruitsBinding)
-    }
-
-    override fun onBindViewHolder(
-        holder: FruitsChoiceAdapter.FruitsChoiceViewHolder,
-        position: Int
-    ) {
-        val item = oldList[position]
-        holder.bind(item)
+        return ItemViewHolder(itemFruitsBinding)
     }
 
     override fun getItemCount(): Int = oldList.size
+
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        val item = oldList[position]
+        holder.bind(item)
+    }
 
     fun setData(newList: List<ItemScan>) {
         val diffCallback = DiffUtils(oldList, newList)
@@ -59,6 +53,8 @@ class FruitsChoiceAdapter : RecyclerView.Adapter<FruitsChoiceAdapter.FruitsChoic
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(item: ItemScan)
+        fun onItemClicked(data: ItemScan)
     }
+
+
 }
